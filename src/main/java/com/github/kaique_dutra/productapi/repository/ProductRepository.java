@@ -1,6 +1,6 @@
-package com.github.ccbkaique_droid.productapi.repository;
+package com.github.kaique_dutra.productapi.repository;
 
-import com.github.ccbkaique_droid.productapi.model.Product;
+import com.github.kaique_dutra.productapi.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

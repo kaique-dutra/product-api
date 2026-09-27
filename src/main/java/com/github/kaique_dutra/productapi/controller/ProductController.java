@@ -1,8 +1,8 @@
-package com.github.ccbkaique_droid.productapi.controller;
+package com.github.kaique_dutra.productapi.controller;
 
 
-import com.github.ccbkaique_droid.productapi.model.Product;
-import com.github.ccbkaique_droid.productapi.repository.ProductRepository;
+import com.github.kaique_dutra.productapi.model.Product;
+import com.github.kaique_dutra.productapi.repository.ProductRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +33,10 @@ public class ProductController {
     public Product obtainPerId(@PathVariable ("id")String id){
         Optional<Product> product = productRepository.findById(id);
         return  product.isPresent() ? product.get() : null;
+    }
+    @GetMapping
+    public List<Product> findAll(){
+        return productRepository.findAll();
     }
 
     @DeleteMapping("{id}")

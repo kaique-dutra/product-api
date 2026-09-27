@@ -1,4 +1,4 @@
-package com.github.ccbkaique_droid.productapi;
+package com.github.kaique_dutra.productapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
