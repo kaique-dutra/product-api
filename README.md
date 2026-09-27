@@ -1,39 +1,42 @@
-Product API 
+# API de Produtos
 
 API REST desenvolvida em Java com Spring Boot para gerenciamento de produtos.
 
-O projeto foi desenvolvido como parte dos meus estudos em desenvolvimento Backend, com foco na construção de APIs REST, operações CRUD, persistência de dados com JPA e integração com banco de dados.
+O projeto foi desenvolvido como parte dos meus estudos em desenvolvimento Backend, com foco na construção de APIs REST, operações CRUD, persistência de dados com JPA/Hibernate, integração com banco de dados e containerização da aplicação com Docker.
 
- Tecnologias
+## Tecnologias utilizadas
 
-* Java 25
-* Spring Boot 4.1.1
-* Spring Web
-* Spring Data JPA
-* Hibernate
-* H2 Database
-* Maven
-* Git & GitHub
+- Java 25
+- Spring Boot 4.1.1
+- Spring Web
+- Spring Data JPA
+- Hibernate
+- Banco de dados H2
+- Maven
+- Docker
+- Git
+- GitHub
 
- Funcionalidades
+## Funcionalidades
 
 A API permite:
 
-*  Criar produtos
-*  Buscar produto por ID
-*  Atualizar produtos
-*  Excluir produtos
-*  Buscar produtos pelo nome
-*  Persistir produtos utilizando JPA/Hibernate
-*  Gerar IDs utilizando UUID
+- Criar produtos
+- Buscar produto por ID
+- Atualizar produtos
+- Excluir produtos
+- Buscar produtos pelo nome
+- Persistir produtos utilizando JPA/Hibernate
+- Gerar IDs utilizando UUID
+- Executar a aplicação em um container Docker
 
- Estrutura do projeto
+## Estrutura do projeto
 
 ```text
 src/
 ├── main/
 │   ├── java/
-│   │   └── com/github/ccbkaique_droid/productapi/
+│   │   └── com/github/kaique_dutra/productapi/
 │   │       ├── controller/
 │   │       │   └── ProductController.java
 │   │       │
@@ -51,186 +54,199 @@ src/
 │
 └── test/
     └── java/
-```
-
- Modelo Product
+Modelo de Produto
 
 Cada produto possui os seguintes atributos:
 
-| Campo         | Tipo   | Descrição                           |
-| ------------- | ------ | ----------------------------------- |
-| `id`          | String | Identificador único gerado com UUID |
-| `name`        | String | Nome do produto                     |
-| `description` | String | Descrição do produto                |
-| `price`       | Double | Preço do produto                    |
+Campo	Tipo	Descrição
+id	String	Identificador único gerado com UUID
+name	String	Nome do produto
+description	String	Descrição do produto
+price	Double	Preço do produto
+Endpoints
+Criar produto
 
- Endpoints
+POST /products
 
- Criar produto
+Exemplo de requisição:
 
-POST `/products`
-
-Exemplo:
-
-```json
 {
   "name": "Notebook",
   "description": "Notebook para desenvolvimento",
   "price": 3500.00
 }
-```
-
 Buscar produto por ID
 
-GET `/products/{id}`
+GET /products/{id}
 
 Exemplo:
 
-```text
 GET /products/550e8400-e29b-41d4-a716-446655440000
-```
+Atualizar produto
 
- Atualizar produto
-
-PUT `/products/{id}`
+PUT /products/{id}
 
 Exemplo:
 
-```text
 PUT /products/550e8400-e29b-41d4-a716-446655440000
-```
 
-Body:
+Corpo da requisição:
 
-```json
 {
   "name": "Notebook Gamer",
   "description": "Notebook atualizado",
   "price": 4500.00
 }
-```
-
 Excluir produto
 
-DELETE `/products/{id}`
+DELETE /products/{id}
 
 Exemplo:
 
-```text
 DELETE /products/550e8400-e29b-41d4-a716-446655440000
-```
-
 Buscar produto por nome
 
-GET `/products/search?name={name}`
+GET /products/search?name={name}
 
 Exemplo:
 
-```text
 GET /products/search?name=Notebook
-```
 
-O endpoint utiliza o parâmetro obrigatório `name` para realizar a busca.
+O endpoint utiliza o parâmetro obrigatório name para realizar a busca.
 
- Banco de dados
+Banco de dados
 
-O projeto utiliza o H2 Database para persistência dos dados durante o desenvolvimento.
+Atualmente, o projeto utiliza o banco de dados H2 em memória para persistência dos dados durante o desenvolvimento.
 
 A configuração do banco está localizada em:
 
-```text
 src/main/resources/application.yml
-```
 
-O projeto também possui um arquivo `data.sql` para inserção de dados iniciais.
+O projeto também possui um arquivo data.sql para inserção de dados iniciais.
 
- Como executar
+Docker
 
- Pré-requisitos
+A aplicação também foi containerizada utilizando Docker.
 
-* Java 25
-* Git
+O projeto possui um Dockerfile responsável por criar a imagem da aplicação e executar o projeto dentro de um container.
+
+Construir a imagem
+
+Na raiz do projeto, execute:
+
+docker build -t productapi .
+Executar o container
+docker run -p 8080:8080 productapi
+
+Após iniciar o container, a aplicação estará disponível em:
+
+http://localhost:8080
+
+Os endpoints da API podem ser acessados normalmente através do container.
+
+Exemplo:
+
+GET http://localhost:8080/products/{id}
+Verificar o container
+
+Para verificar os containers em execução:
+
+docker ps
+
+A aplicação deverá aparecer com a porta:
+
+0.0.0.0:8080->8080/tcp
+Docker Compose
+
+O projeto também possui um arquivo compose.yaml, permitindo executar os serviços definidos no projeto utilizando Docker Compose.
+
+Para iniciar os serviços:
+
+docker compose up
+
+Para executar em segundo plano:
+
+docker compose up -d
+
+Para parar os serviços:
+
+docker compose down
+Como executar localmente
+Pré-requisitos
+Java 25
+Git
+Docker (opcional, caso queira executar a aplicação em container)
 
 O projeto possui Maven Wrapper, portanto não é necessário instalar o Maven separadamente.
 
- Clone o repositório
-
-```bash
+Clonar o projeto
 git clone git@github.com:ccbkaique-droid/product-api.git
-```
-
-Entre na pasta:
-
-```bash
+Entrar na pasta
 cd product-api
-```
-
- Execute a aplicação
-
-No Windows:
-
-```bash
+Executar a aplicação
+Windows
 .\mvnw.cmd spring-boot:run
-```
-
-No Linux/macOS:
-
-```bash
+Linux/macOS
 ./mvnw spring-boot:run
-```
 
 A API estará disponível em:
 
-```text
 http://localhost:8080
-```
-
- Testes
+Testes
 
 Para executar os testes automatizados:
 
- Windows
-
-```bash
+Windows
 .\mvnw.cmd test
-```
-
 Linux/macOS
-
-```bash
 ./mvnw test
-```
-
 Conceitos praticados
 
 Durante o desenvolvimento deste projeto foram praticados conceitos como:
 
-* APIs REST
-* HTTP Methods
-* Spring Boot
-* Spring Web
-* Controllers
-* Request Mapping
-* Request Body
-* Path Variables
-* Request Parameters
-* CRUD
-* Spring Data JPA
-* JPA/Hibernate
-* Entidades
-* Repositories
-* Persistência de dados
-* UUID
-* Banco de dados H2
-* Maven
-* Git
-* GitHub
-
+Desenvolvimento de APIs REST
+Métodos HTTP
+Spring Boot
+Spring Web
+Controllers
+Mapeamento de requisições
+Request Body
+Path Variables
+Request Parameters
+CRUD
+Spring Data JPA
+JPA/Hibernate
+Entidades
+Repositórios
+Persistência de dados
+UUID
+Banco de dados H2
+Maven
+Docker
+Dockerfile
+Docker Compose
+Containerização de aplicações
+Git
+GitHub
 Objetivo
 
-Este projeto faz parte do meu processo de aprendizado em desenvolvimento Backend com Java e Spring Boot, servindo como prática para construção de APIs REST e integração com banco de dados.
+Este projeto faz parte do meu processo de aprendizado em desenvolvimento Backend com Java e Spring Boot.
 
-  Autor
+O objetivo é praticar, de forma progressiva, a construção de APIs REST, implementação de operações CRUD, persistência de dados, integração com banco de dados e utilização de Docker para containerização da aplicação.
+
+Próximos passos
+
+Algumas melhorias planejadas para o projeto:
+
+Substituir o banco H2 por PostgreSQL
+Configurar PostgreSQL utilizando Docker
+Integrar o projeto com pgAdmin
+Melhorar o tratamento de exceções
+Implementar validação dos dados recebidos
+Criar testes automatizados para os endpoints
+Documentar a API com Swagger/OpenAPI
+Autor
+
 Kaique Faria Dutra
 
-GitHub: [ccbkaique-droid](https://github.com/ccbkaique-droid)
+GitHub: kaique-dutra
