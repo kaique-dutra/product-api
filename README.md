@@ -11,6 +11,7 @@ O projeto foi desenvolvido como parte dos meus estudos em desenvolvimento Backen
 - Spring Web
 - Spring Data JPA
 - Hibernate
+- Lombok
 - Banco de dados H2
 - Maven
 - Docker
